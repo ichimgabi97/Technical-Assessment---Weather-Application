@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 
 import Search from "./Search";
-import {getLocationName} from '../../API/BigDataCloud';
+import { getLocationName } from '../../API/BigDataCloud';
+import { getWeatherFormCoords } from "../../API/OpenMeteo";
 
 const Home = ()=>{
     const [selectedCity, setSelectedCity] = useState({name: '', latitude: 0, longitude: 0});
     const [searchResult, setSearchResult] = useState([]);
     const [cleanInput, setCleanInput] = useState(true);
     const [locationCity, setLocationCity] = useState({});
+    const [weather, setWeather] = useState({});
 
     useEffect(() =>{
         if(navigator.geolocation){
@@ -35,9 +37,17 @@ const Home = ()=>{
         }))
     }
 
+    const getWeather = async () =>{
+        setWeather(await getWeatherFormCoords(locationCity.latitude, locationCity.longitude));
+    }
+
     useEffect(() =>{
         getLocationNameFromCoords();
     },[]);
+
+    useEffect(() =>{
+        getWeather();
+    }, [locationCity]); 
     
     return(
         <>
@@ -56,10 +66,6 @@ const Home = ()=>{
                         </li>
                     ))}
                 </ul>
-
-                <div>{`${selectedCity.name}, ${selectedCity.latitude}, ${selectedCity.longitude}`}</div>
-                <div>{`${locationCity.latitude}, ${locationCity.longitude}, ${locationCity.name}`}</div>
-                <div>{}</div>
             </div>
         </>
     );
