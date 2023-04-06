@@ -29,11 +29,10 @@ const Home = ()=>{
 
     const getLocationNameFromCoords = async () =>{
         const cityName = await getLocationName(locationCity);
-        setLocationCity({
+        setLocationCity((prevState) => ({
             name: cityName,
-            latitude: locationCity.latitude, 
-            longitude: locationCity.longitude
-        })
+            ...prevState
+        }))
     }
 
     useEffect(() =>{

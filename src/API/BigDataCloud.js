@@ -9,6 +9,6 @@ export const getLocationName = async ({latitude, longitude}) =>{
         console.log(error);
     })
 
-    console.log(locationsName.city);
+    //console.log(locationsName.city);
     return locationsName.city;
 }
