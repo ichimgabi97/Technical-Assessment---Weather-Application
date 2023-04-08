@@ -1,0 +1,73 @@
+:root {
+    --gap: 20px;
+    --elementWidth: 200px;
+}
+
+.card {
+    margin: var(--gap);
+    width: var(--elementWidth);
+    
+    padding: var(--gap);
+}
+
+.card .compass svg:not(.will_transform) {
+    filter: opacity(0.4);
+}
+
+.active {
+    background-color: #3ab1d800;
+}
+
+.active .hour {
+    color: white;
+}
+
+.active .compass svg {
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg) opacity(1);
+}
+
+.active .compass .compass_content {
+    color: white;
+}
+
+.compass_content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--elementWidth)/5;
+    font-weight: bold;
+}
+
+.compass_content .unit {
+    font-size: var(--elementWidth)/8;
+    font-weight: 100;
+}
+
+.compass {
+    position: relative;
+    width: 100%;
+    height: var(--elementWidth);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.compass > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.compass svg:not(.will_transform) {
+    filter: opacity(0.4);
+}

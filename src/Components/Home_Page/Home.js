@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 
 import Search from "./Search";
+import ListOfCitys from "./ListOfCitys";
+import Weather from "./Weather";
+import Background from "../UI/Background";
+
 import { getLocationName } from '../../API/BigDataCloud';
 import { getWeatherFormCoords } from "../../API/OpenMeteo";
+
+import styles from './Home.module.css';
 
 const Home = ()=>{
     const [selectedCity, setSelectedCity] = useState({name: '', latitude: 0, longitude: 0});
@@ -17,6 +23,13 @@ const Home = ()=>{
         }else{
             console.log('Geolocation is not suported by your browser');
         }
+        setInterval(() => {
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition( position => setLocationCity({latitude: position.coords.latitude, longitude: position.coords.longitude}), err => alert(err.message));
+            }else{
+                console.log('Geolocation is not suported by your browser');
+            }
+        }, 60000);
     }, []);
 
     const handleClick = ({name, latitude, longitude}) =>{
@@ -51,22 +64,11 @@ const Home = ()=>{
     
     return(
         <>
-            <Search
-                value = {cleanInput} 
-                changeListHandle = {handleChangeList}
-            />
-            <div>
-                <ul>
-                    {searchResult.map(el=> (
-                        <li 
-                          key={el.id}
-                          onClick={() => handleClick(el)}
-                        >
-                            {`${el.name}, ${el.country}`}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <Background>
+                <Search value = {cleanInput} changeListHandle = {handleChangeList} />
+                <ListOfCitys list={searchResult} clickHandle={handleClick}/>
+                <Weather currentPosition = {locationCity} weatherInfo = {weather}/>
+            </Background>
         </>
     );
 }

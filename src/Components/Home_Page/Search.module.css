@@ -1,0 +1,25 @@
+.container{
+    margin: 10% 0 0 0;
+}
+
+.search_input{
+    width: 200px;
+    height: 25px;
+
+    border: 1px solid #000000;
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.17);
+
+    text-indent: 10px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #fff;
+}
+
+.search_input:focus{
+    outline: none;
+}

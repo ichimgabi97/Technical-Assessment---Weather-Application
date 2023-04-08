@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import {getLocations} from '../../API/Geocoding';
 
+import styles from './Search.module.css';
+
 const Search = (props) => {
 
     const [city, setCity] = useState('');
@@ -29,8 +31,10 @@ const Search = (props) => {
     }, [city]);
 
     return(
-        <div>
-            <input 
+        <div className={styles.container}>
+            <input
+                className={styles.search_input}
+                autoComplete='off' 
                 type='text'
                 name='city'
                 onChange={handleChange}
