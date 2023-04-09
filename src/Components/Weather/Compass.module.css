@@ -1,13 +1,10 @@
 :root {
     --gap: 20px;
-    --elementWidth: 200px;
+    --elementWidth: 240px;
 }
 
 .card {
-    margin: var(--gap);
     width: var(--elementWidth);
-    
-    padding: var(--gap);
 }
 
 .card .compass svg:not(.will_transform) {
@@ -42,7 +39,7 @@
     align-items: center;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    font-size: var(--elementWidth)/5;
+    font-size: 26px;
     font-weight: bold;
 }
 

@@ -10,8 +10,8 @@ export const getWeatherFormCoords = async (placeLatitude, placeLongitude)=>{
                 latitude: placeLatitude,
                 longitude: placeLongitude,
                 current_weather: true,
-                hourly: 'temperature_2m',
-                daiy: 'sunrise',
+                hourly: 'apparent_temperature,weathercode',
+                daily: 'sunrise,sunset,apparent_temperature_min,apparent_temperature_max,weathercode',
                 forecast_days: 7,
                 timezone: 'auto'
             }
@@ -21,7 +21,7 @@ export const getWeatherFormCoords = async (placeLatitude, placeLongitude)=>{
             console.log(error);
         })
 
-        //console.log(weather);
+        console.log(weather);
         return weather;
     }
     

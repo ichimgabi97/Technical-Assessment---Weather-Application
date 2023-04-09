@@ -1,0 +1,6 @@
+.widgets{
+    width: 620px;
+
+    display: flex;
+    flex-direction: row; 
+}

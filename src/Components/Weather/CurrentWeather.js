@@ -9,7 +9,7 @@ const CurrentWeather = (props) =>{
     const [time, setTime] = useState(new Date());
 
     useEffect(() =>{
-        setInterval(() => setTime(new Date()), 1000)
+        setInterval(() => setTime(new Date()), 1000);
     }, []);
 
     return(

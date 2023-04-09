@@ -23,12 +23,14 @@ const Home = ()=>{
         }else{
             console.log('Geolocation is not suported by your browser');
         }
+        getLocationNameFromCoords();
         setInterval(() => {
             if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition( position => setLocationCity({latitude: position.coords.latitude, longitude: position.coords.longitude}), err => alert(err.message));
             }else{
                 console.log('Geolocation is not suported by your browser');
             }
+            getLocationNameFromCoords();
         }, 60000);
     }, []);
 
@@ -53,10 +55,6 @@ const Home = ()=>{
     const getWeather = async () =>{
         setWeather(await getWeatherFormCoords(locationCity.latitude, locationCity.longitude));
     }
-
-    useEffect(() =>{
-        getLocationNameFromCoords();
-    },[]);
 
     useEffect(() =>{
         getWeather();
