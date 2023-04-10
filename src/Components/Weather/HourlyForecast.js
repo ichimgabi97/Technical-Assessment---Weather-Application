@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react';
 import styles from './HourlyForecast.module.css';
 
 import clear_day_img from '../../assets/clear-day.png';
+import arrow_right from '../../assets/Carret_Right.png';
+import arrow_left from '../../assets/Carret_Left.png';
 
 const HourlyForecast = (props) =>{
-    console.log(props.hourly);
-    console.log(props.daily);
+    // console.log(props.hourly);
+    // console.log(props.daily);
 
     const [hourlyList, setHourlyList] = useState([]);
     const [startHourIndex, setStartHourIndex] = useState(0);
@@ -30,14 +32,33 @@ const HourlyForecast = (props) =>{
 
     useEffect(()=>{
         setHourlyList(getHourlyList(props.hourly, props.daily));
+        setInterval(() => {
+            setHourlyList(getHourlyList(props.hourly, props.daily));
+        }, 60000);
+        
         //console.log('--------------------------')
         //console.log(hourlyList);
     }, []);
 
+    const handleClickLeft = () =>{
+        if(startHourIndex - 1 >= 0){
+            setStartHourIndex(startHourIndex - 1);
+        }
+    }
+
+    const handleClickRight = () =>{
+        if(startHourIndex + 9 <= hourlyList.length){
+            setStartHourIndex(startHourIndex + 1);
+        }
+    }
+
     return(
-        <>
-        <button onClick={() => setStartHourIndex(startHourIndex + 1)}>Click</button>
         <div className={styles.container}>
+            <div className={styles.button} onClick={handleClickLeft}>
+                <div className={`${styles.circle}`}>
+                    <img src={arrow_left} alt='arrow left'/>
+                </div>
+            </div>
             {hourlyList.slice(startHourIndex, startHourIndex + 8).map(el =>(
                 <div className={styles.container_hourly} key={el.id}>
                     <p className={styles.hour}>{el.id === 0 ? 'Now' : el.time.slice(11, 13)}</p>
@@ -45,9 +66,12 @@ const HourlyForecast = (props) =>{
                     <p className={styles.temp}>{`${Math.round(el.apparent_temperature)} ℃`}</p>
                 </div>
             ))}
+            <div className={styles.button} onClick={handleClickRight}>
+                <div className={`${styles.circle}`}>
+                    <img src={arrow_right} alt='arrow right'/>
+                </div>
+            </div>
         </div>
-        </>
-        
     );
 }
 

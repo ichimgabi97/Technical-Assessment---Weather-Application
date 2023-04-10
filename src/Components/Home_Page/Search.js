@@ -18,7 +18,7 @@ const Search = (props) => {
     }
 
     const LogApi = async (cityName) =>{
-        if(cityName.length >= 2){
+        if(cityName.length > 2){
             props.changeListHandle( await getLocations(cityName));
         }else{
             props.changeListHandle([]);
@@ -39,6 +39,7 @@ const Search = (props) => {
                 name='city'
                 onChange={handleChange}
                 value={city}
+                placeholder="City name"
             />
         </div>
     );

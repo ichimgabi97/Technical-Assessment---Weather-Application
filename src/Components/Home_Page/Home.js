@@ -4,6 +4,8 @@ import Search from "./Search";
 import ListOfCitys from "./ListOfCitys";
 import Weather from "./Weather";
 import Background from "../UI/Background";
+import Overlay from "../UI/Overlay";
+import FavoriteLocations from "./FavoriteLocations";
 
 import { getLocationName } from '../../API/BigDataCloud';
 import { getWeatherFormCoords } from "../../API/OpenMeteo";
@@ -16,6 +18,10 @@ const Home = ()=>{
     const [cleanInput, setCleanInput] = useState(true);
     const [locationCity, setLocationCity] = useState({});
     const [weather, setWeather] = useState({});
+    const [overlay, setOverlay] = useState(false);
+    const [favoriteLocations, setFavoriteLocations] = useState([]);
+    const [favoriteLocationSelected, setFavoriteLocationSelected] = useState({});
+    const [overlayFavorite, setOverlayFavorite] = useState(false);
 
     useEffect(() =>{
         if(navigator.geolocation){
@@ -34,10 +40,16 @@ const Home = ()=>{
         }, 60000);
     }, []);
 
-    const handleClick = ({name, latitude, longitude}) =>{
-        setSelectedCity({name, latitude, longitude});
+    const handleClick = (city) =>{
+        setSelectedCity({
+            name: city.name, 
+            latitude: city.latitude, 
+            longitude: city.longitude
+        });
+        console.log(selectedCity);
         setSearchResult([]);
         setCleanInput(!cleanInput);
+        setOverlay(!overlay);
     }
 
     const handleChangeList = (list) =>{
@@ -60,12 +72,59 @@ const Home = ()=>{
         getWeather();
     }, [locationCity]); 
     
+    const handleExit = () =>{
+        setOverlay(!overlay);
+    }
+
+    const containsObject = (obj) => {
+        for (let i = 0; i < favoriteLocations.length; i++) {
+            if (favoriteLocations[i].name === obj.name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const handleAddFavorite = (el) =>{
+        if(!containsObject(el)){
+            setFavoriteLocations((prevState) => [...prevState, el]);
+        }
+        setOverlay(!overlay);
+    }
+
+    const handleDelete = (location) =>{
+        setFavoriteLocations(favoriteLocations.filter(el => el !== location));
+    }
+
+    const displayLocation = (location) =>{
+        setFavoriteLocationSelected(location);
+        setOverlayFavorite(!overlayFavorite);
+    }
+
+    const handleExitFavorite = () =>{
+        setOverlayFavorite(!overlayFavorite);
+    }
+
     return(
         <>
             <Background>
-                <Search value = {cleanInput} changeListHandle = {handleChangeList} />
-                <ListOfCitys list={searchResult} clickHandle={handleClick}/>
-                <Weather currentPosition = {locationCity} weatherInfo = {weather}/>
+                {overlayFavorite && (
+                    <Overlay searchedCity = {favoriteLocationSelected} exitHandle={handleExitFavorite} addToFavorite={handleAddFavorite} showAdd = {false}/>
+                )}
+                {overlay && (
+                    <Overlay searchedCity = {selectedCity} exitHandle={handleExit} addToFavorite={handleAddFavorite} showAdd = {true}/>
+                )}
+                {(!overlay && !overlayFavorite) && (
+                    <>
+                        <Search value = {cleanInput} changeListHandle = {handleChangeList} />
+                        <ListOfCitys list={searchResult} clickHandle={handleClick}/>
+                        {favoriteLocations.length !== 0 ? (
+                            <FavoriteLocations favoriteList = {favoriteLocations} removeLocation={handleDelete} selectedLocation={displayLocation}/>
+                        ) : undefined}
+                        <Weather currentPosition = {locationCity} weatherInfo = {weather}/>
+                    </>
+                )}
+                
             </Background>
         </>
     );

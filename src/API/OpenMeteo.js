@@ -21,7 +21,7 @@ export const getWeatherFormCoords = async (placeLatitude, placeLongitude)=>{
             console.log(error);
         })
 
-        console.log(weather);
+        //console.log(weather);
         return weather;
     }
     
