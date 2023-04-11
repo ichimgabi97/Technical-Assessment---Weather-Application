@@ -29,3 +29,26 @@
     align-items: center;
     justify-content: space-between;
 }
+
+@media only screen and (max-width: 983px) {
+    .container_widgets{
+        width: 100%;
+
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .widgets{
+        margin-top: 2%;
+
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between; 
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .widgets{
+        margin-top: 5%;
+    } 
+}

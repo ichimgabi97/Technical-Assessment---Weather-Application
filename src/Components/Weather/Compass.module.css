@@ -68,3 +68,22 @@
 .compass svg:not(.will_transform) {
     filter: opacity(0.4);
 }
+
+@media only screen and (max-width: 983px) {
+    :root {
+        --gap: 20px;
+        --elementWidth: 190px;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    :root {
+        --gap: 20px;
+        --elementWidth: 120px;
+    }
+
+    .compass_content {
+        font-size: 16px;
+        font-weight: bold;
+    }
+}

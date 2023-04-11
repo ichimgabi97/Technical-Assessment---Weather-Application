@@ -57,3 +57,41 @@
     color: #FFFFFF;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+@media only screen and (max-width: 983px) {
+    .container{
+        margin-right: 3%;
+
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media only screen and (max-width: 480px){
+    .container{
+        margin-right: 3%;
+
+        width: 160px;
+        height: 160px;
+    }
+
+    .temp img{
+        width: 60px;
+    }
+
+    .temp p{
+        font-size: 22px;
+        line-height: 23px;
+    }
+
+    .title{
+        padding: 0 0 0 10%;
+
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .temp{
+        padding: 2% 0 0 10%;
+    }
+}

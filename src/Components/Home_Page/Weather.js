@@ -8,7 +8,7 @@ import styles from './Weather.module.css';
 const Weather = (props) => {
 
     try{
-        if(props.weatherInfo.current_weather){
+        if(props.weatherInfo.current_weather && props.currentPosition.name !== ''){
             //console.log(props.weatherInfo);
     
             return(

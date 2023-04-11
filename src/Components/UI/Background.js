@@ -6,12 +6,15 @@ const Background = (props) =>{
     const [isDay, setIsDay] = useState(true);
 
     useEffect(() =>{
-        if(props.weatherInfo.current_weather.is_day === 0){
-            setIsDay(false);
-        }else{
-            setIsDay(true);
+        try{
+            if(props.weatherInfo.current_weather.is_day === 0){
+                setIsDay(false);
+            }else{
+                setIsDay(true);
+            }
+        }catch{
         }
-    },[]);
+    },[props.weatherInfo]);
     
     return(
         <main className={`${styles.container} ${isDay ? styles.day : styles.night}`}>

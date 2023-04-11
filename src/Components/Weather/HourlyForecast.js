@@ -53,6 +53,12 @@ const HourlyForecast = (props) =>{
         }
     }
 
+    const handleClickRightSix = () =>{
+        if(startHourIndex + 7 <= hourlyList.length){
+            setStartHourIndex(startHourIndex + 1);
+        }
+    }
+
     return(
         <div className={styles.container}>
             <div className={styles.button} onClick={handleClickLeft}>
@@ -75,7 +81,7 @@ const HourlyForecast = (props) =>{
                     <img src={arrow_right} alt='arrow right'/>
                 </div>
             </div>
-        </div>
+        </div>     
     );
 }
 
