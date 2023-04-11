@@ -3,7 +3,13 @@
 
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; 
+}
 
+.day{
     background-color: #0078d4;
+}
+
+.night{
+    background-color: #002D50;
 }

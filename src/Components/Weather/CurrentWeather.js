@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import styles from './CurrentWeather.module.css';
+import { getWeatherImageData } from '../../data/weather_code_images';
 
-import clear_day_img from '../../assets/clear-day.png';
+import styles from './CurrentWeather.module.css';
 
 const CurrentWeather = (props) =>{
 
@@ -17,7 +17,10 @@ const CurrentWeather = (props) =>{
             <h3 className={styles.title}>{props.name}</h3>
             <h4 className={styles.time}>{time.toLocaleTimeString().slice(0, 5) + time.toLocaleTimeString().slice(8)}</h4>
             <div className={styles.temp}>
-                <img src={clear_day_img} alt='clear day'/>
+                <img 
+                    src={getWeatherImageData(props.weatherCode, props.isDay)[0].image} 
+                    alt={getWeatherImageData(props.weatherCode, props.isDay)[0].alt}
+                />
                 <p>{`${Math.round(props.temp)} ℃`}</p>
             </div>
         </div>

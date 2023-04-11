@@ -46,7 +46,7 @@ const Home = ()=>{
             latitude: city.latitude, 
             longitude: city.longitude
         });
-        console.log(selectedCity);
+        //console.log(selectedCity);
         setSearchResult([]);
         setCleanInput(!cleanInput);
         setOverlay(!overlay);
@@ -107,7 +107,7 @@ const Home = ()=>{
 
     return(
         <>
-            <Background>
+            <Background weatherInfo = {weather}>
                 {overlayFavorite && (
                     <Overlay searchedCity = {favoriteLocationSelected} exitHandle={handleExitFavorite} addToFavorite={handleAddFavorite} showAdd = {false}/>
                 )}

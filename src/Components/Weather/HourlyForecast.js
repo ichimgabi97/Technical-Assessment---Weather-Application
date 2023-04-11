@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 
+import { getWeatherImageData } from '../../data/weather_code_images';
+
 import styles from './HourlyForecast.module.css';
 
-import clear_day_img from '../../assets/clear-day.png';
 import arrow_right from '../../assets/Carret_Right.png';
 import arrow_left from '../../assets/Carret_Left.png';
 
@@ -62,7 +63,10 @@ const HourlyForecast = (props) =>{
             {hourlyList.slice(startHourIndex, startHourIndex + 8).map(el =>(
                 <div className={styles.container_hourly} key={el.id}>
                     <p className={styles.hour}>{el.id === 0 ? 'Now' : el.time.slice(11, 13)}</p>
-                    <img src={clear_day_img} alt='clear day' />
+                    <img 
+                        src={getWeatherImageData(el.weathercode, 1)[0].image} 
+                        alt={getWeatherImageData(el.weathercode, 1)[0].alt} 
+                    />
                     <p className={styles.temp}>{`${Math.round(el.apparent_temperature)} ℃`}</p>
                 </div>
             ))}

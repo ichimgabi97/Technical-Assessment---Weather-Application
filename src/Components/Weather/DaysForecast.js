@@ -1,8 +1,8 @@
 import { useState ,useEffect } from 'react';
 
-import styles from './DaysForecast.module.css';
+import { getWeatherImageData } from '../../data/weather_code_images';
 
-import clear_day_img from '../../assets/clear-day.png';
+import styles from './DaysForecast.module.css';
 
 //forecast
 const DaysForecast = (props) =>{
@@ -47,7 +47,10 @@ const DaysForecast = (props) =>{
             {forecast.map(el => (
                 <div key={el.id} className={styles.day}>
                     <p className={styles.day_name}>{el.dayName}</p>
-                    <img src={clear_day_img} alt='clear day'/> 
+                    <img 
+                        src={getWeatherImageData(el.weathercode, 1)[0].image} 
+                        alt={getWeatherImageData(el.weathercode, 1)[0].alt}
+                    /> 
                     <p className={styles.day_temp}>{`${Math.round(el.minTemp)} ℃ / ${Math.round(el.maxTemp)} ℃`}</p>
                 </div>
             ))}
